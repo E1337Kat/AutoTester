@@ -8,6 +8,9 @@
 *
 */
 
+#ifndef __UserID_H_INCLUDED__
+#define __UserID_H_INCLUDED__
+
 class UserID {
   public:
     UserID(String user_domain, String user_type, String test_type);
@@ -25,3 +28,5 @@ class UserID {
 
     void generateNewUserID();
 }
+
+#endif
