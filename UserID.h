@@ -11,13 +11,15 @@
 #ifndef __UserID_H_INCLUDED__
 #define __UserID_H_INCLUDED__
 
+#include <string>
+
 class UserID {
   public:
-    UserID(String user_domain, String user_type, String test_type);
+    UserID(string user_domain, string user_type, string test_type);
     UserID(const UserID &obj);
     ~UserID();
     
-    String getIDasString();
+    string getIDasString();
     unsigned long getIDasLong();
     
   private:
