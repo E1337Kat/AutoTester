@@ -15,7 +15,7 @@
 
 class UserID {
   public:
-    UserID(string user_domain, string user_type, string test_type);
+    UserID(string user_domain, string test_type, string user_type);
     UserID(const UserID &obj);
     ~UserID();
     

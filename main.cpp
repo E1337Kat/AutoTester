@@ -9,6 +9,7 @@
 */
 
 //#include <curl/curl.h>
+#include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -16,6 +17,9 @@
 
 using namespace std;
 
+const string EMAILPOST = "@wecounsel.com";  //const ending of all testing email addresses
+vector<User> users = NULL;
+vector<string> input_responses = NULL;
 // const char data[]="this is what we post to the silly web server";
  
 // struct WriteThis {
@@ -43,12 +47,19 @@ using namespace std;
 
 /* START MAIN CLASS */
 int main(int argc, char* argv) {
+  //@TODO Check to see if a file exists that contains user objects, if so load into array
   printWelcome();
   printMenu();
   string option_choice;
   cin >> option_choice;
   while (option_choice != ("3" || "q" || "quit") ){
-    if ()
+    if (1) {
+      input_responses = NULL;
+      cout << "Enter new user information!" << endl;
+      input_responses = inputPrompt();
+      buildEmail(input_responses);
+      //POST_TO_DB
+    }
   }
 
   return 0;
@@ -88,14 +99,21 @@ void printMenu () {
 *   @return: vector<string> holds input
 */
 vector<string> inputPrompt() {
-  vector<string> input = new vector<string>
+  input_responses = new vector<string>;
+  string in;
 
+  cout << "Domain to test on(for specific portal testing)" <, endl;
+  cin >> in;
+  input_responses.push_back(in);
   cout << "Test issue: " << endl;
-  cin >> input[0];
+  cin >> in;
+  input_responses.push_back(in);
   cout << "User type: " << endl;
-  cin >> input[1];
+  cin >> in;
+  input_responses.push_back(in);
   //cout << "Email base: " << endl;
-  //cin >> input[2];
+  //cin >> in;
+  //input_responses.push_back(in);
 
   return input;
 }
@@ -107,11 +125,19 @@ vector<string> inputPrompt() {
 *   @param: vector<string>
 */
 string buildEmail(vector<string> in) {
-  //string email = in[2];
+  //string email = in[3];
   string email = "elliep";
 
-  UserID uuid = new UserID(email, in[1], in[0])
+  UserID uuid = new UserID(in[0], in[1], in[2]);
 
+  email = email + 
+            "+" + 
+            in[0] + 
+            "." + 
+            in[2] + 
+            "." +
+            uuid.getIDasString() +
+            EMAILPOST;
 
 
   return email;
@@ -122,4 +148,12 @@ string buildEmail(vector<string> in) {
 *   desc: print output
 */
 void outputPrompt() {
+}
+
+/*  
+*   name: loadUsersintVector
+*   desc: loads User objects from file into vector to search
+*/
+void loadUsersintVector(/*file of User objects*/) {
+
 }
