@@ -112,75 +112,86 @@ unsigned long UserID::getIDasLong() {
 *   a1-a0: represents time at creation
 *   
 */
-void UserID::generateNewUserID() {
+string UserID::generateNewUserID() {
 
-    int tempint;                                        //temp int to hold (int)char before appending onto end of string_num_[sub]
+    int tempint = 0;                                        //temp int to hold (int)char before appending onto end of string_num_[sub]
 
     int num_domain;                                     //full int value for domain
-    string string_num_domain;                           //string of int representing domain
-    for (int i = 0; i < m_domain.length(); i++) {       //for each in string
+    //string string_num_domain;                           //string of int representing domain
+    for (unsigned int i = 0; i < m_domain.length(); i++) {       //for each in string
         if (m_domain[i] != ' ') {                       //skip spaces
-            tempint = (int) m_domain[i];
-            string_num_domain + tempint;
+            tempint += (int) m_domain[i];
         }
     }
-    cout << "int representing domain: " << string_num_domain <<endl;
+    num_domain = tempint;
+    tempint = 0;
+    cout << "int representing domain: " << num_domain <<endl;
 
     int num_type;
-    string string_num_type;
-    for (int i =0; i <m_type.length(); i++) {           //for each in string
+    //string string_num_type;
+    for (unsigned int i =0; i <m_type.length(); i++) {           //for each in string
         if (m_type[i] != ' ') {                         //skip spaces
-            tempint = (int) m_type[i];
-            string_num_type + tempint;
+            tempint += (int) m_type[i];
         }
     }
-    cout << "int representing user type: " << string_num_type <<endl;
+    num_type = tempint;
+    tempint = 0;
+    cout << "int representing user type: " << num_type <<endl;
 
     int num_test;
-    string string_num_test;
-    if (m_test != NULL) {
-        for (int i = 0; i < m_test.length(); i++) {     //for each in string
+    //string string_num_test;
+    if (m_test != "") {
+        for (unsigned int i = 0; i < m_test.length(); i++) {     //for each in string
             if (m_test[i] != ' ') {                     //skip spaces
-                tempint = (int) m_type[i];
-                string_num_test + tempint;
+                tempint += (int) m_type[i];
             }
         }
+        num_test = tempint;
+        tempint = 0;
     } 
     else {
-        string_num_test = '0';
+        num_test = 0;
     }
-    cout << "int representing test: " << string_num_test <<endl;
+    cout << "int representing test: " << num_test <<endl;
     
-    time_point<steady_clock> t_clock = now();           //get the current time
-    time_t t_epoch = to_time_t(tclock);                 //convert to epoch time
-    m_time = ctime(t_epoch);                            //convert that to a string
+    chrono::time_point<chrono::system_clock> t_clock = chrono::system_clock::now();             //get the current time
+    time_t t_epoch = chrono::system_clock::to_time_t(t_clock);                                  //convert to epoch time
+    m_time = ctime(&t_epoch);                                                                    //convert that to a string
 
     int num_time;
-    string string_num_time;
-    for (int i = 0; i < m_time.length(); i++) {
+    //string string_num_time;
+    for (unsigned int i = 0; i < m_time.length(); i++) {
         if (m_time[i] != ' ') {
-            tempint = (int) m_time[i];
-            string_num_time + tempint;
+            tempint += (int) m_time[i];
+            
         }
     }
-    num_time = string_num_time.stoi();
-    cout << "int representing epoch time: " << string_num_time <<endl;
+    num_time = tempint;
+    tempint = 0;
+    cout << "int representing epoch time: " << num_time <<endl;
 
 
-    string string_long;
+    int total = num_test + num_type + num_domain;
+
     unsigned long long_string;
+    string string_long;
+    
 
-    long_string = string_num_domain.stoul();
-    string_long 
+    long_string = total;
+    string_long = int_to_hex(long_string);
 
+    long_string = num_time;
+    string_long  = string_long + int_to_hex(long_string).substr(2);
+    
+    return string_long;
 }
 
 template< typename T >
-std::string int_to_hex( T i )
+string int_to_hex( T i )
 {
-  std::stringstream stream;
+  stringstream stream;
   stream << "0x" 
-         << std::setfill ('0') << std::setw(sizeof(T)*2) 
-         << std::hex << i;
+         << setfill ('0') << setw(4) 
+         << hex << i;
   return stream.str();
 }
