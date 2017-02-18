@@ -47,7 +47,15 @@ vector<string> input_responses = NULL;
 
 /* START MAIN CLASS */
 int main(int argc, char* argv) {
-  //@TODO Check to see if a file exists that contains user objects, if so load into array
+  //@TODO Check to see if a file exists(on DB) 
+      //that contains user objects, if so load into array
+  /*
+  if (file exists on DB) {
+    loadUsersintoVector();
+
+  }
+  
+  */
   printWelcome();
   printMenu();
   string option_choice;
@@ -148,12 +156,13 @@ string buildEmail(vector<string> in) {
 *   desc: print output
 */
 void outputPrompt() {
+
 }
 
 /*  
 *   name: loadUsersintVector
 *   desc: loads User objects from file into vector to search
 */
-void loadUsersintVector(/*file of User objects*/) {
-
+void loadUsersintoVector(/*file of User objects*/) {
+  
 }

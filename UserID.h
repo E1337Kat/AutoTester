@@ -11,22 +11,29 @@
 #ifndef __UserID_H_INCLUDED__
 #define __UserID_H_INCLUDED__
 
-#include <string>
+#include <string> //  std::string
+
 
 class UserID {
   public:
-    UserID(string user_domain, string test_type, string user_type);
+
+    UserID(std::string user_domain, std::string test_type, std::string user_type);
+    UserID(std::string uuid);
+    UserID(unsigned long uuid);
     UserID(const UserID &obj);
     ~UserID();
     
-    string getIDasString();
+    std::string getIDasString();
     unsigned long getIDasLong();
+
+    void createFromID();
     
   private:
-    String domain;
-    String type;
-    String test;
-    unsigned long id;
+    std::string m_domain;
+    std::string m_type;
+    std::string m_test;
+    std::string m_time;
+    unsigned long m_id;
 
     void generateNewUserID();
 }
