@@ -11,7 +11,7 @@
 #ifndef __DATABASEHELPER_H_INCLUDED__
 #define __DATABASEHELPER_H_INCLUDED__
 
-#include <mysql.h>
+//#include <mysql.h>
 
 class DatabaseHelper {
   public:
@@ -20,8 +20,8 @@ class DatabaseHelper {
 
   private:
     //@TODO add functions/variables
-    const static string DATABASE_NAME = "db 1"
-    MYSQL* db_conn;
+    //const static string DATABASE_NAME = "db 1"
+    //MYSQL* db_conn;
 };
 
 #endif //__DATABASEHELPER_H_INCLUDED__
