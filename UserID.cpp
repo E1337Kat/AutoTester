@@ -1,10 +1,8 @@
-/**
+/*
 *   @author:   Ellie Peterson
+*   @version: 0.0.1
 *   Project:  Autotester for wecounsel auto testing with Json API
 *   Purpose:  The goal of this application is to automate user testing on the WeCounsel application
-*   
-*
-*
 *
 */
 
@@ -28,18 +26,16 @@ using namespace std;
 *   @param: string user_type - holds the user type i.e. Provider, Client, or Admin
 */
 UserID::UserID(string user_domain, string test_type, string user_type) {
-    domain = user_domain;
-    type = user_type;
-    test = test_type;
+    m_domain = user_domain;
+    m_type = user_type;
+    m_test = test_type;
 
 }
 
 /**
 *   Constructor
-*   Constructs a new UUID from the given inputs and the current time
-*   @param: string user_domain - holds the domain to test on
-*   @param: string test_type - holds the type of test being created
-*   @param: string user_type - holds the user type i.e. Provider, Client, or Admin
+*   Constructs a new UUID from the uuid passed to the Constructor
+*   @param: uuid is passed to constructor
 */
 UserID::UserID(string uuid) {
     unsigned long id = stol(uuid, nullptr, 16);
@@ -47,63 +43,59 @@ UserID::UserID(string uuid) {
 
 /**
 *   Constructor
-*   Constructs a new UUID from the given inputs and the current time
-*   @param: string user_domain - holds the domain to test on
-*   @param: string test_type - holds the type of test being created
-*   @param: string user_type - holds the user type i.e. Provider, Client, or Admin
+*   Constructs a new UUID from the uuid passed to the constructor
+*   @param: uuid is passed to the constructor
 */
 UserID::UserID(unsigned long uuid) {
-    ;
+    ;//@TODO Rework class to make possible to get input from uuid.
 }
 
 /**
-*   Constructor
+*   Copy Constructor
 *   Constructs a new UUID from the given inputs and the current time
 *   @param: string user_domain - holds the domain to test on
 *   @param: string test_type - holds the type of test being created
 *   @param: string user_type - holds the user type i.e. Provider, Client, or Admin
 */
 UserID::UserID(const UserID &obj) {
-
+    m_domain = obj.m_domain;
+    m_type = obj.m_type;
+    m_test = obj.m_test;
+    m_time = obj.m_time;
+    m_id = obj.m_id;
 }
 
 /**
-*   Constructor
-*   Constructs a new UUID from the given inputs and the current time
-*   @param: string user_domain - holds the domain to test on
-*   @param: string test_type - holds the type of test being created
-*   @param: string user_type - holds the user type i.e. Provider, Client, or Admin
+*   Default Destructor
+*   destroys the object created by a constructor
 */
 UserID::~UserID() {
-
+    m_domain = NULL;
+    m_type = NULL;
+    m_test = NULL;
+    m_time = NULL;
+    m_id = NULL;
 }
 
 /**
-*   Constructor
-*   Constructs a new UUID from the given inputs and the current time
-*   @param: string user_domain - holds the domain to test on
-*   @param: string test_type - holds the type of test being created
-*   @param: string user_type - holds the user type i.e. Provider, Client, or Admin
+*   Getter for the uuid
+*   @return string representing the uuid. Returned in a "readable format" 
 */
 string UserID::getIDasString() {
-
+    return int_to_hex(m_id);
 }
 
 /**
-*   Constructor
-*   Constructs a new UUID from the given inputs and the current time
-*   @param: string user_domain - holds the domain to test on
-*   @param: string test_type - holds the type of test being created
-*   @param: string user_type - holds the user type i.e. Provider, Client, or Admin
+*   Getter for created uuid. 
+*   @return unsigned long integer holding the uuid
 */
 unsigned long UserID::getIDasLong() {
-
+    return m_id;
 }
 
 //PRIVATE
 /**
-*   Constructor
-*   generates a new UUID from the given inputs and the current time
+*   Generates a new UUID from the given inputs and the current time
 *   range: 00000000 - FFFFFFFF ; 0000 0000 0000 0000  0000 0000 0000 0000 - 1111 1111 1111 1111  1111 1111 1111 1111
 *                               | a7   a6   a5   a4    a3   a2   a1   a0 |-| a7   a6   a5   a4    a3   a2   a1   a0 |
 *   a7-a6: represents domain
@@ -186,12 +178,17 @@ string UserID::generateNewUserID() {
     return string_long;
 }
 
+/**
+*   Small helper function to convert from int to hex string
+*   @param i generic type to convert to a hex string.
+*   @return string representing a base 16 number
+*/
 template< typename T >
 string int_to_hex( T i )
 {
-  stringstream stream;
-  stream << "0x" 
-         << setfill ('0') << setw(4) 
-         << hex << i;
-  return stream.str();
+    stringstream stream;
+    stream << "0x" 
+        << setfill ('0') << setw(4) 
+        << hex << i;
+    return stream.str();
 }

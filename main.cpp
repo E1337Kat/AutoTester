@@ -1,10 +1,8 @@
-/*
-*   Author:   Ellie Peterson
+/**
+*   @author:  Ellie Peterson
+*   @version: 0.0.1
 *   Project:  Autotester for wecounsel auto testing with Json API
 *   Purpose:  The goal of this application is to automate user testing on the WeCounsel application
-*
-*
-*
 *
 */
 
@@ -26,7 +24,7 @@ vector<string> input_responses = NULL;
 
 
 /* START MAIN CLASS */
-/* 
+/**
 *   function: initializes the program and sets the environment
 *   @return int for status
 *   @param argc count of arguments passed into program
@@ -39,7 +37,6 @@ vector<string> input_responses = NULL;
           --new, --n 
           --add, --a
           --remove, -r
-          
         -file, -f <options> [file] : Sets program to read history from file
           options:
           --csv, --c :indicates file is csv (DEFAULT)
@@ -88,12 +85,11 @@ int main(int argc, char* argv) {
 
 /* START HELPER FUNCTIONS */
 
-/*  
-*   name: printWelcome
-*   desc: print welcome on start up
+/**  
+*   Prints the welcome message to to terminal
 */
 void printWelcome() {
-  cout << "Copywrite Ellie Peterson 2017; source only available to approved employees of WeCounsel." << endl << endl << endl;
+  cout << "Copyright Ellie Peterson 2017; source only available to approved employees of WeCounsel." << endl << endl << endl;
   cout << "Welcome to user gen for WeCounsel, ltd." << endl;
   cout << "The only required information is the issue you are testing, and the type of user to be testing on" << endl;
   cout << "With that, the program will do the rest, including building a Unique user id, first name, last name, and email" << endl;
@@ -103,8 +99,8 @@ void printWelcome() {
 }
 
 /*  
-*   name: printMenu
-*   desc: print menu for options
+*   Prints the menu for options
+*   @param choice is used to determine which input type to list
 */
 void printMenu (int choice) {
   if (choice == 1) {    
@@ -124,8 +120,8 @@ void printMenu (int choice) {
 }
 
 /*  
-*   name: inputPrompt
-*   desc: print and recieve input
+*   Prints and recieve input
+*   @param choice used to determine which promp to use
 *   @return: vector<string> holds input
 */
 vector<string> inputPrompt(int choice) {
@@ -145,7 +141,7 @@ vector<string> inputPrompt(int choice) {
     //cout << "Email base: " << endl;
     //cin >> in;
     //input_responses.push_back(in);
-  } else if (choice == 2) {
+  } else if (choice == 2) {   //No specified test case
     cout << "Domain to test on(for specific portal testing)" <, endl;
     cin >> in;
     input_responses.push_back(in);
@@ -166,10 +162,9 @@ vector<string> inputPrompt(int choice) {
 }
 
 /*  
-*   name: buildEmail
-*   desc: builds email to POST to server
+*   Builds email to POST to server
 *   @return: string email - holds input
-*   @param: vector<string>
+*   @param: in vectpr that holds input values
 */
 string buildEmail(vector<string> in) {
   //string email = in[3];
